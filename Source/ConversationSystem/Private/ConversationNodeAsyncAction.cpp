@@ -20,7 +20,7 @@ UConversationNodeAsyncAction* UConversationNodeAsyncAction::DisplayConversationN
     NewAction->ContextWorld = ContextWorld;
     NewAction->ConversationNode = Node;
     NewAction->ConversationReply = Reply;
-    NewAction->ConversationReply->ContextWorld;
+    NewAction->ConversationReply->ContextWorld = ContextWorld;
     NewAction->RegisterWithGameInstance(ContextWorld->GetGameInstance());
     return NewAction;
 }
