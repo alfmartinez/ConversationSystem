@@ -14,7 +14,4 @@ class CONVERSATIONSYSTEM_API UConversationNode : public UObject
 {
 	GENERATED_BODY()
 	
-public:
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = ConversationNode)
-	void Display();
 };

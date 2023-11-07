@@ -17,8 +17,6 @@ class CONVERSATIONSYSTEM_API UConversationReply : public UObject
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = ConversationNode)
-	void DisplayOptions();
 
 	UFUNCTION(BlueprintCallable, Category = ConversationNode)
 	void DoReply(FName ReplyName) {

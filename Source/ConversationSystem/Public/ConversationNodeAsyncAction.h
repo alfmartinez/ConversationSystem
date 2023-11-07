@@ -39,7 +39,6 @@ public:
         return ReplyName;
     }
 
-private:
     void ProcessReply(FName Name);
 
 private:

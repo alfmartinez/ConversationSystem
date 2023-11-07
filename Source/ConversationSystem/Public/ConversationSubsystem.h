@@ -16,8 +16,8 @@ enum class EConversationStatus : uint8
 };
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConversationStatusUpdated, EConversationStatus, Status);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConversationReplySent, FName, ReplyName);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnReplyOptionsReceived, UConversationReply*, Options);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNodeDisplay, UConversationNode*, Node);
 
 /**
  * 
@@ -44,18 +44,23 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
+	void DisplayConversationNode(UConversationNode* Node)
+	{
+		OnNodeDisplay.Broadcast(Node);
+	}
+
+	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
 	void SendReplyOptions(UConversationReply* Reply) {
 		OnReplyOptionsSent.Broadcast(Reply);
 	}
-
 
 public:
 	UPROPERTY(BlueprintAssignable)
 	FOnConversationStatusUpdated OnConversationStatusUpdated;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnConversationReplySent OnReplySent;
+	FOnReplyOptionsReceived OnReplyOptionsSent;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnReplyOptionsReceived OnReplyOptionsSent;
+	FOnNodeDisplay OnNodeDisplay;
 };

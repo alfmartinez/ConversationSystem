@@ -2,6 +2,7 @@
 
 
 #include "ConversationNodeAsyncAction.h"
+#include "ConversationSubsystem.h"
 
 UConversationNodeAsyncAction* UConversationNodeAsyncAction::DisplayConversationNode(
     const UObject* WorldContext,
@@ -28,8 +29,11 @@ void UConversationNodeAsyncAction::Activate()
 {
     if (const UWorld* World = GetWorld())
     {
-        ConversationNode->Display();
+        UGameInstance* GameInstance = World->GetGameInstance();
+        UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
+        CS->DisplayConversationNode(ConversationNode);
         ConversationReply->OnReply.AddUObject(this, &UConversationNodeAsyncAction::ProcessReply);
+        CS->SendReplyOptions(ConversationReply);
         return;
     }
 
@@ -40,6 +44,7 @@ void UConversationNodeAsyncAction::Activate()
 
 void UConversationNodeAsyncAction::Cancel()
 {
+    ConversationReply->OnReply.Clear();
     Super::Cancel();
 }
 
