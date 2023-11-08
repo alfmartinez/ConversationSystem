@@ -18,7 +18,7 @@ class CONVERSATIONSYSTEM_API UConversationAsyncAction : public UCancellableAsync
 
 public:
 	UFUNCTION(BlueprintCallable, DisplayName = "Start Conversation", meta = (WorldContext = "WorldContext", BlueprintInternalUseOnly = "true"))
-	static UConversationAsyncAction* StartConversation(const UObject* WorldContext, UObject* Outer, TSubclassOf<UConversationAsyncAction> ConversationClass);
+	static UConversationAsyncAction* StartConversation(const UObject* WorldContext, UObject* Outer, TSubclassOf<UConversationAsyncAction> ConversationClass, FName Name);
 
 
 	// Start UCancellableAsyncAction Functions
@@ -52,6 +52,8 @@ public:
 private:
 	/** The context world of this action. */
 	TWeakObjectPtr<UWorld> ContextWorld = nullptr;
+
+	FName ConversationName;
 	
 public:
 	UPROPERTY(BlueprintAssignable)

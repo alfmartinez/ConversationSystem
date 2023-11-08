@@ -15,7 +15,7 @@ enum class EConversationStatus : uint8
 	ABORTED			UMETA(DisplayName = "Aborted")
 };
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnConversationStatusUpdated, EConversationStatus, Status);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnConversationStatusUpdated, EConversationStatus, Status, FName, Name);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnReplyOptionsReceived, UConversationReply*, Options);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnNodeDisplay, UConversationNode*, Node);
 
@@ -29,18 +29,18 @@ class CONVERSATIONSYSTEM_API UConversationSubsystem : public UGameInstanceSubsys
 
 public:
 	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
-	void StartConversation() {
-		OnConversationStatusUpdated.Broadcast(EConversationStatus::STARTED);
+	void StartConversation(FName Name) {
+		OnConversationStatusUpdated.Broadcast(EConversationStatus::STARTED, Name);
 	}
 
 	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
-	void FinishConversation() {
-		OnConversationStatusUpdated.Broadcast(EConversationStatus::COMPLETED);
+	void FinishConversation(FName Name) {
+		OnConversationStatusUpdated.Broadcast(EConversationStatus::COMPLETED, Name);
 	}
 
 	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
-	void AbortConversation() {
-		OnConversationStatusUpdated.Broadcast(EConversationStatus::ABORTED);
+	void AbortConversation(FName Name) {
+		OnConversationStatusUpdated.Broadcast(EConversationStatus::ABORTED, Name);
 	}
 
 	UFUNCTION(BlueprintCallable, Category = ConversationSystem)
