@@ -2,6 +2,7 @@
 
 
 #include "ConversationAsyncAction.h"
+#include "ConversationSubsystem.h"
 
 UConversationAsyncAction* UConversationAsyncAction::StartConversation(const UObject* WorldContext, UObject* Outer, TSubclassOf<UConversationAsyncAction> ConversationClass)
 {
@@ -34,17 +35,26 @@ void UConversationAsyncAction::Prepare_Implementation()
 
 void UConversationAsyncAction::Start_Implementation()
 {
+    UGameInstance* GameInstance = GetWorld()->GetGameInstance();
+    UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
+    CS->StartConversation();
     OnStarted.Broadcast();
 }
 
 void UConversationAsyncAction::Abort_Implementation()
 {
+    UGameInstance* GameInstance = GetWorld()->GetGameInstance();
+    UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
+    CS->AbortConversation();
     OnAborted.Broadcast();
     Cancel();
 }
 
 void UConversationAsyncAction::Finish_Implementation()
 {
+    UGameInstance* GameInstance = GetWorld()->GetGameInstance();
+    UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
+    CS->FinishConversation();
     OnFinished.Broadcast();
     Cancel();
 }
