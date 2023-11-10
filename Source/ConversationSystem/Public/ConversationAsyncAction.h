@@ -40,8 +40,8 @@ public:
 	void Abort_Implementation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
-	void Finish();
-	void Finish_Implementation();
+	void Finish(bool bSubconversation = false);
+	void Finish_Implementation(bool bSubconversation = false);
 
 	// Start UObject Functions
 	virtual UWorld* GetWorld() const override
@@ -53,9 +53,13 @@ private:
 	/** The context world of this action. */
 	TWeakObjectPtr<UWorld> ContextWorld = nullptr;
 
-	FName ConversationName;
+	
 	
 public:
+
+	UPROPERTY(BlueprintReadOnly, Category = Conversation)
+	FName ConversationName;
+
 	UPROPERTY(BlueprintAssignable)
 	FOnConversationDelegate OnStarted;
 

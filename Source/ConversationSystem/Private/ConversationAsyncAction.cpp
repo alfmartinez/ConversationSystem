@@ -51,11 +51,14 @@ void UConversationAsyncAction::Abort_Implementation()
     Cancel();
 }
 
-void UConversationAsyncAction::Finish_Implementation()
+void UConversationAsyncAction::Finish_Implementation(bool bSubconversation)
 {
-    UGameInstance* GameInstance = GetWorld()->GetGameInstance();
-    UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
-    CS->FinishConversation(ConversationName);
+    if (!bSubconversation)
+    {
+        UGameInstance* GameInstance = GetWorld()->GetGameInstance();
+        UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
+        CS->FinishConversation(ConversationName);
+    }
     OnFinished.Broadcast();
     Cancel();
 }
