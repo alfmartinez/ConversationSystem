@@ -44,7 +44,6 @@ void UConversationNodeAsyncAction::Activate()
 
 void UConversationNodeAsyncAction::Cancel()
 {
-    ConversationReply->OnReply.Clear();
     Super::Cancel();
 }
 
