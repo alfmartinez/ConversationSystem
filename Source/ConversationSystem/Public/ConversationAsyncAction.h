@@ -4,7 +4,47 @@
 
 #include "CoreMinimal.h"
 #include "Engine/CancellableAsyncAction.h"
+#include "GameplayTagContainer.h"
 #include "ConversationAsyncAction.generated.h"
+
+/** Please add a struct description */
+USTRUCT(BlueprintType)
+struct FReplyOption
+{
+	GENERATED_BODY()
+
+public:
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "ReplyName", MakeStructureDefaultValue = "None"))
+	FName ReplyName;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "Text"))
+	FText Text;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (MultiLine = "true", DisplayName = "LongText"))
+	FText LongText;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "Query"))
+	FGameplayTagQuery Query;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "IsDefault", MakeStructureDefaultValue = "False"))
+	bool IsDefault;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "Enabled", MakeStructureDefaultValue = "True"))
+	bool Enabled;
+
+	/** Please add a variable description */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (DisplayName = "IsLong", MakeStructureDefaultValue = "True"))
+	bool IsLong;
+};
+
+
+
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnConversationDelegate);
 
@@ -60,6 +100,18 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = Conversation)
 	FName ConversationName;
 
+	UPROPERTY(BlueprintReadWrite, Category = DialogueLine)
+	int DialogueLineIndex;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Speaker)
+	FText Speaker;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Speaker)
+	TObjectPtr<UTexture2D> SpeakerImage;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Replies)
+	TArray<FReplyOption> ReplyOptions;
+
 	UPROPERTY(BlueprintAssignable)
 	FOnConversationDelegate OnStarted;
 
@@ -68,5 +120,6 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnConversationDelegate OnAborted;
+
 
 };
