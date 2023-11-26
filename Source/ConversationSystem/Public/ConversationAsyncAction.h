@@ -109,7 +109,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Speaker)
 	TObjectPtr<UTexture2D> SpeakerImage;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Replies)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Replies, AdvancedDisplay)
 	TArray<FReplyOption> ReplyOptions;
 
 	UPROPERTY(BlueprintAssignable)
