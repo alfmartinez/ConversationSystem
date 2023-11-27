@@ -23,7 +23,7 @@ public:
 	FText Text;
 
 	/** Please add a variable description */
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (MultiLine = "true", DisplayName = "LongText"))
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (MultiLine = "true", DisplayName = "LongText", EditCondition="IsLong", EditConditionHides))
 	FText LongText;
 
 	/** Please add a variable description */
@@ -94,7 +94,10 @@ private:
 	/** The context world of this action. */
 	TWeakObjectPtr<UWorld> ContextWorld = nullptr;
 
-	
+protected:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Replies, AdvancedDisplay)
+	TArray<FReplyOption> ReplyOptions;
+
 	
 public:
 
@@ -110,9 +113,7 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Speaker)
 	TObjectPtr<UTexture2D> SpeakerImage;
 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Replies, AdvancedDisplay)
-	TArray<FReplyOption> ReplyOptions;
-
+	
 	UPROPERTY(BlueprintAssignable)
 	FOnConversationDelegate OnStarted;
 
