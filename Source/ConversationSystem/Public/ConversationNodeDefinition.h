@@ -9,6 +9,16 @@
 
 struct FReplyOption;
 
+UENUM(BlueprintType)
+enum class ECompletionBehavior : uint8
+{
+	DO_RESTART	UMETA(DisplayName = "Restart"),
+	DO_FINISH	UMETA(DisplayName = "Finish"),
+	DO_CONTINUE	UMETA(DisplayName = "Continue")
+};
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnFragmentComplete, ECompletionBehavior, Behavior);
+
 UCLASS(Blueprintable, DefaultToInstanced, EditInlineNew, Abstract)
 class CONVERSATIONSYSTEM_API UConversationNodeFragment : public UObject
 {
@@ -22,18 +32,28 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category=ConversationFragment)
-	void ProcessFragment(FName InName, UConversationAsyncAction* Conversation ) {
-		if (Trigger.ReplyName == InName)
-		{
-			DoProcess(Conversation);
-		}
+	bool FilterFragment(FName InName) {
+		return (Trigger.ReplyName == InName);
 	}
 
-	UFUNCTION(BlueprintImplementableEvent, Category=ConversationFragment)
+	UFUNCTION(BlueprintCallable)
+	void Complete() {
+		OnFragmentComplete.Broadcast(ExpectedBehavior);
+	}
+
+	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category=ConversationFragment)
 	void DoProcess(UConversationAsyncAction* Conversation);
+
+public:
 
 	UPROPERTY(EditDefaultsOnly, Category=Branch)
 	FReplyOption Trigger;
+
+	UPROPERTY(EditDefaultsOnly, Category=Branch)
+	ECompletionBehavior ExpectedBehavior;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnFragmentComplete OnFragmentComplete;
 };
 
 
