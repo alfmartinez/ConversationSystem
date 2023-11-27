@@ -41,8 +41,10 @@ public:
 		OnFragmentComplete.Broadcast(ExpectedBehavior);
 	}
 
-	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category=ConversationFragment)
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category=ConversationFragment)
 	void DoProcess(UConversationAsyncAction* Conversation);
+	virtual void DoProcess_Implementation(UConversationAsyncAction* Conversation) {}
+
 
 public:
 
