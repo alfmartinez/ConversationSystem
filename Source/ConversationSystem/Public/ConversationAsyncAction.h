@@ -84,6 +84,7 @@ public:
 	void Finish_Implementation(bool bSubconversation = false);
 
 	// Start UObject Functions
+	UFUNCTION(BlueprintCallable, Category=Conversation)
 	virtual UWorld* GetWorld() const override
 	{
 		return ContextWorld.IsValid() ? ContextWorld.Get() : nullptr;
