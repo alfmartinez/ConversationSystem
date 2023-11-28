@@ -101,7 +101,7 @@ protected:
 	
 public:
 
-	UPROPERTY(BlueprintReadOnly, Category = Conversation)
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category = Conversation)
 	FName ConversationName;
 
 	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category=Conversation)
