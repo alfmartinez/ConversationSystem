@@ -16,6 +16,6 @@ class CONVERSATIONSYSTEM_API UBranchingFragment : public UContentFragment
 
 public:
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Branches, meta = (TitleProperty = "DisplayName"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Branches, meta = (TitleProperty = "DisplayName"), Instanced)
 	TArray<TObjectPtr<UTriggerableFragment>> Branches;
 };
