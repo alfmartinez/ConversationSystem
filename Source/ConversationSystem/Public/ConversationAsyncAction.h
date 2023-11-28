@@ -68,20 +68,20 @@ public:
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
 	void Prepare();
-	void Prepare_Implementation();
+	virtual void Prepare_Implementation();
 
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
 	void Start();
-	void Start_Implementation();
+	virtual void Start_Implementation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
 	void Abort();
-	void Abort_Implementation();
+	virtual void Abort_Implementation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
 	void Finish();
-	void Finish_Implementation();
+	virtual void Finish_Implementation();
 
 	// Start UObject Functions
 	UFUNCTION(BlueprintCallable, Category=Conversation)

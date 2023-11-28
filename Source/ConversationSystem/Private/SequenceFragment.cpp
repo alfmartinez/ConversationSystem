@@ -44,3 +44,45 @@ void USequenceFragment::Advance(ECompletionBehavior InBehavior)
 		break;
 	}
 }
+
+void USequenceContentFragment::DoProcess_Implementation(UConversationAsyncAction* InConversation)
+{
+	Super::DoProcess_Implementation(InConversation);
+	Index = 0;
+	Conversation = InConversation;
+	ProcessFragment();
+}
+
+void USequenceContentFragment::ProcessFragment()
+{
+	if (Fragments.IsValidIndex(Index)) {
+		CurrentFragment = Fragments[Index];
+		CurrentFragment->OnFragmentComplete.Clear();
+		CurrentFragment->OnFragmentComplete.AddDynamic(this, &USequenceContentFragment::Advance);
+		CurrentFragment->DoProcess(Conversation);
+	}
+}
+
+void USequenceContentFragment::Advance(ECompletionBehavior InBehavior)
+{
+	switch (InBehavior) {
+	case ECompletionBehavior::DO_RESTART:
+		Conversation->Start();
+		Complete();
+		break;
+	case ECompletionBehavior::DO_FINISH:
+		Conversation->Finish();
+		Complete();
+		break;
+	case ECompletionBehavior::DO_CONTINUE:
+		Index++;
+		if (Index > Fragments.Num())
+		{
+			Complete();
+		}
+		else {
+			ProcessFragment();
+		}
+		break;
+	}
+}

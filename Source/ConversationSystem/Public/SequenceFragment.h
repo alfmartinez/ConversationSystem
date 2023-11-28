@@ -30,3 +30,25 @@ private:
 	UConversationAsyncAction* Conversation;
 	TWeakObjectPtr<UConversationNodeFragment> CurrentFragment;
 };
+
+
+UCLASS()
+class CONVERSATIONSYSTEM_API USequenceContentFragment : public UContentFragment
+{
+	GENERATED_BODY()
+
+public:
+	virtual void DoProcess_Implementation(UConversationAsyncAction* Conversation) override;
+public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Sequence, Instanced, meta = (TitleProperty = "DisplayName"))
+	TArray<TObjectPtr<UContentFragment>> Fragments;
+private:
+	void ProcessFragment();
+
+	UFUNCTION()
+	void Advance(ECompletionBehavior InBehavior);
+
+	int Index;
+	UConversationAsyncAction* Conversation;
+	TWeakObjectPtr<UConversationNodeFragment> CurrentFragment;
+};

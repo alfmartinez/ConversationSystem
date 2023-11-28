@@ -83,6 +83,15 @@ public:
 };
 
 
+UCLASS(Abstract)
+class CONVERSATIONSYSTEM_API UContentFragment : public UConversationNodeFragment
+{
+
+	GENERATED_BODY()
+
+};
+
+
 
 UCLASS(Blueprintable, Const, Abstract)
 class CONVERSATIONSYSTEM_API UConversationNodeDefinition : public UObject
@@ -95,6 +104,6 @@ public:
 	FText DisplayName;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Branches, Instanced, meta = (TitleProperty = "DisplayName"))
-	TArray<TObjectPtr<UTriggerableFragment>> Fragments;
+	TObjectPtr<UContentFragment> EntryPoint;
 
 };
