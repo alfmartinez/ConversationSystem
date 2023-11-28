@@ -80,8 +80,8 @@ public:
 	void Abort_Implementation();
 
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = Conversation)
-	void Finish(bool bSubconversation = false);
-	void Finish_Implementation(bool bSubconversation = false);
+	void Finish();
+	void Finish_Implementation();
 
 	// Start UObject Functions
 	UFUNCTION(BlueprintCallable, Category=Conversation)
@@ -103,6 +103,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, Category = Conversation)
 	FName ConversationName;
+
+	UPROPERTY(BlueprintReadOnly, EditDefaultsOnly, Category=Conversation)
+	bool bIsRoot;
 
 	UPROPERTY(BlueprintReadWrite, Category = DialogueLine)
 	int DialogueLineIndex;

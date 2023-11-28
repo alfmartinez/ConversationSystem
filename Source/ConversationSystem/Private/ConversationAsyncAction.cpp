@@ -51,9 +51,9 @@ void UConversationAsyncAction::Abort_Implementation()
     Cancel();
 }
 
-void UConversationAsyncAction::Finish_Implementation(bool bSubconversation)
+void UConversationAsyncAction::Finish_Implementation()
 {
-    if (!bSubconversation)
+    if (bIsRoot)
     {
         UGameInstance* GameInstance = GetWorld()->GetGameInstance();
         UConversationSubsystem* CS = GameInstance->GetSubsystem<UConversationSubsystem>();
