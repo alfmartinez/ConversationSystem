@@ -11,7 +11,7 @@
  * 
  */
 UCLASS()
-class CONVERSATIONSYSTEM_API USequenceFragment : public UConversationNodeFragment
+class CONVERSATIONSYSTEM_API USequenceFragment : public UTriggerableFragment
 {
 	GENERATED_BODY()
 	

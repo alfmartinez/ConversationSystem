@@ -5,6 +5,7 @@
 
 void USequenceFragment::DoProcess_Implementation(UConversationAsyncAction* InConversation)
 {
+	Super::DoProcess_Implementation(InConversation);
 	Index = 0;
 	Conversation = InConversation;
 	ProcessFragment();
