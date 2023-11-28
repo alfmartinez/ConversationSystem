@@ -18,7 +18,7 @@ class CONVERSATIONSYSTEM_API USequenceFragment : public UConversationNodeFragmen
 public:
 	virtual void DoProcess_Implementation(UConversationAsyncAction* Conversation) override;
 public:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Sequence, Instanced)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Sequence, Instanced, meta = (TitleProperty = "DisplayName"))
 	TArray<TObjectPtr<UConversationNodeFragment>> Fragments;
 private:
 	void ProcessFragment();

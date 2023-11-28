@@ -47,6 +47,8 @@ public:
 
 
 public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Display)
+	FText DisplayName;
 
 	UPROPERTY(EditDefaultsOnly, Category=Branch)
 	FReplyOption Trigger;
@@ -70,7 +72,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Display)
 	FText DisplayName;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Branches, Instanced)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Branches, Instanced, meta = (TitleProperty = "DisplayName"))
 	TArray<TObjectPtr<UConversationNodeFragment>> Fragments;
 
 };
