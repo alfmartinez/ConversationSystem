@@ -34,7 +34,7 @@ void USequenceFragment::Advance(ECompletionBehavior InBehavior)
 		break;
 	case ECompletionBehavior::DO_CONTINUE:
 		Index++;
-		if (Index > Fragments.Num())
+		if (Index >= Fragments.Num())
 		{
 			Complete();
 		}
@@ -76,7 +76,7 @@ void USequenceContentFragment::Advance(ECompletionBehavior InBehavior)
 		break;
 	case ECompletionBehavior::DO_CONTINUE:
 		Index++;
-		if (Index > Fragments.Num())
+		if (Index >= Fragments.Num())
 		{
 			Complete();
 		}
